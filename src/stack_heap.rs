@@ -1,3 +1,12 @@
+/*
+ * enumの各要素にデータ型を持たせるが、Nodeのデータ型をListにしていることで、領域が定まってないListはコンパイル時にエラーを吐く
+ * それをBox pointerを用いて、サイズを確定させ、コンパイルが通るようにする
+ */
+enum List {
+    Node(i32, Box<List>),
+    Nil,
+}
+
 pub fn run() {
     /*
      * Stack overflow
@@ -29,4 +38,19 @@ pub fn run() {
     v1.append(&mut v3);
     println!("{:?}", v1);
     println!("{:?}", v3);
+
+    /*
+     * box pointer
+     */
+    let t1 = (10, String::from("hello"));
+    println!("Stack Address of t1 is: {:p}", &t1);
+    println!("Heap memory address of t1.1: {:?}", t1.1.as_ptr());
+    println!("len of t1 is: {:?}", t1.1.len());
+    println!("capacity of t1 is: {:?}", t1.1.capacity());
+    let mut b1 = Box::new(t1);
+    (*b1).1 += " world";
+    println!("{} {}", b1.0, b1.1);
+    println!("{} {}", b1.0, b1.1);
+    println!("Stack Address of box pointer b1 is: {:p}", &b1);
+    println!("Heap memory address of tbox pointer b1: {:p}", b1);
 }
