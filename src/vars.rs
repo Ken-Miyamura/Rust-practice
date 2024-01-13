@@ -58,4 +58,46 @@ pub fn run() {
     let a1: [i32; 5] = [1, 2, 3, 4, 5];
     let a2 = [0; 10];
     println!("{:?} {:?} {}", a1, a2, a1[2]);
+
+    /*
+     * 文字列スライス型とstring型
+     * rustはutf8を採用している。
+     * 文字列スライス型では、テキストの実体は静的領域に格納される（Static）
+     * string型はheapの領域に格納される
+     * capacityは、stringが動的に変更される場合に、lengthよりも多く容量を確保してくれる
+     * 文字列スライスは参照。stringは所有
+     */
+
+    // 文字列スライス型は、&str
+    let s1 = "helloこんにちは挨拶"; //26bytes
+    let s2 = "hello"; //5bytes
+    println!("Stack address s1 is: {:p}", &s1);
+    println!("Stack address s2 is: {:p}", &s2);
+    println!("Stack memory address s1 is: {:p}", s1.as_ptr());
+    println!("Stack memory address s2 is: {:p}", s2.as_ptr());
+    println!("Len of s1 is: {}", s1.len());
+    println!("Len of s2 is: {}", s2.len());
+
+    // string型は文字の　ながさ変えられるので、mutにしておく
+    let mut s1 = String::from("hello");
+    let mut s2 = String::from("hello world");
+    println!("Stack address s1 is: {:p}", &s1);
+    println!("Stack address s2 is: {:p}", &s2);
+    println!("Heap memory address s1 is: {:p}", s1.as_ptr());
+    println!("Heap memory address s2 is: {:p}", s2.as_ptr());
+    println!("Len of s1 is: {}", s1.len());
+    println!("Len of s2 is: {}", s2.len());
+    println!("Capacity of s1 is: {}", s1.capacity());
+    println!("Capacity of s2 is: {}", s2.capacity());
+    s1.push_str("new1");
+    s2.push_str("new2");
+    println!("{} {}", s1, s2);
+    println!("Stack address s1 is: {:p}", &s1);
+    println!("Stack address s2 is: {:p}", &s2);
+    println!("Heap memory address s1 is: {:p}", s1.as_ptr());
+    println!("Heap memory address s2 is: {:p}", s2.as_ptr());
+    println!("Len of s1 is: {}", s1.len());
+    println!("Len of s2 is: {}", s2.len());
+    println!("Capacity of s1 is: {}", s1.capacity());
+    println!("Capacity of s2 is: {}", s2.capacity());
 }
