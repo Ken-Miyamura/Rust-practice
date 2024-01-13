@@ -1,4 +1,4 @@
-FROM rust:1.66-buster
+FROM rust:1.75-bullseye
 
 RUN apt-get update && \
     apt-get -y install git && \
