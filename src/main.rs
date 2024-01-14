@@ -7,6 +7,7 @@
 // mod structs;
 // mod traits;
 mod err_handling;
+mod unit_test;
 
 fn main() {
     // println!("Hello, world!");
